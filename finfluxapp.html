@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinFlux — Intelligent Cash Flow for Modern Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080C18;
+  --bg2: #0D1220;
+  --bg3: #111827;
+  --accent: #00E5C0;
+  --accent2: #0099FF;
+  --text: #F0F4FF;
+  --muted: #7A8AAD;
+  --border: rgba(255,255,255,0.07);
+  --card: rgba(255,255,255,0.04);
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 5%;
+  background: rgba(8,12,24,0.7);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 0.9rem; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--accent); color: #050A14;
+  border: none; padding: 0.55rem 1.4rem;
+  border-radius: 6px; font-family: var(--font-body);
+  font-weight: 500; font-size: 0.9rem;
+  cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+}
+.nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 8rem 5% 5rem;
+  position: relative; overflow: hidden;
+}
+
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); opacity: 0.18; pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+.orb1 { width: 520px; height: 520px; background: var(--accent); top: -120px; left: -100px; animation-delay: 0s; }
+.orb2 { width: 400px; height: 400px; background: var(--accent2); bottom: -80px; right: -60px; animation-delay: -3s; }
+.orb3 { width: 300px; height: 300px; background: #7B61FF; top: 40%; left: 55%; animation-delay: -5s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.05); }
+  66% { transform: translate(-15px, 20px) scale(0.97); }
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,229,192,0.1); border: 1px solid rgba(0,229,192,0.25);
+  color: var(--accent); border-radius: 100px;
+  font-size: 0.8rem; font-weight: 500;
+  padding: 0.35rem 1rem; margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease both;
+}
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -2px;
+  max-width: 820px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  margin-top: 1.5rem;
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 520px;
+  font-weight: 300;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; margin-top: 2.5rem;
+  align-items: center; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.btn-primary {
+  background: var(--accent); color: #050A14;
+  border: none; padding: 0.85rem 2rem;
+  border-radius: 8px; font-family: var(--font-body);
+  font-weight: 500; font-size: 1rem;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,229,192,0.25); }
+.btn-ghost {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border); padding: 0.85rem 2rem;
+  border-radius: 8px; font-family: var(--font-body);
+  font-weight: 500; font-size: 1rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); background: var(--card); }
+
+/* ── DASHBOARD PREVIEW ── */
+.dashboard-wrap {
+  position: relative; margin-top: 5rem; width: 100%; max-width: 900px;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+.dashboard-glow {
+  position: absolute; inset: -2px; border-radius: 18px;
+  background: linear-gradient(135deg, rgba(0,229,192,0.3), rgba(0,153,255,0.15), transparent);
+  filter: blur(1px);
+}
+.dashboard {
+  position: relative;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+.dash-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.5rem;
+}
+.dash-title { font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; }
+.dash-date { font-size: 0.8rem; color: var(--muted); }
+.dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.dash-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1rem;
+}
+.dash-card-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem; }
+.dash-card-value { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; }
+.dash-card-change {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.75rem; margin-top: 0.3rem;
+  color: var(--accent); background: rgba(0,229,192,0.1);
+  padding: 2px 8px; border-radius: 100px;
+}
+.dash-card-change.down { color: #FF6B6B; background: rgba(255,107,107,0.1); }
+
+.chart-area {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1rem;
+}
+.chart-bar-row {
+  display: flex; align-items: flex-end; gap: 8px;
+  height: 80px; margin-top: 1rem;
+}
+.bar {
+  flex: 1; border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, var(--accent), rgba(0,229,192,0.3));
+  transition: height 1s ease;
+  animation: growBar 1.2s ease both;
+}
+@keyframes growBar {
+  from { transform: scaleY(0); transform-origin: bottom; }
+  to { transform: scaleY(1); transform-origin: bottom; }
+}
+.bar:nth-child(1)  { height: 40%; animation-delay: 0.5s; }
+.bar:nth-child(2)  { height: 65%; animation-delay: 0.55s; }
+.bar:nth-child(3)  { height: 50%; animation-delay: 0.6s; }
+.bar:nth-child(4)  { height: 80%; animation-delay: 0.65s; }
+.bar:nth-child(5)  { height: 60%; animation-delay: 0.7s; }
+.bar:nth-child(6)  { height: 90%; animation-delay: 0.75s; }
+.bar:nth-child(7)  { height: 70%; animation-delay: 0.8s; background: linear-gradient(180deg, var(--accent2), rgba(0,153,255,0.3)); }
+
+.chart-label { font-size: 0.75rem; color: var(--muted); }
+
+/* ── STATS ── */
+.stats {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 5rem 0; padding: 0 5%;
+}
+.stat {
+  flex: 1; min-width: 160px;
+  text-align: center; padding: 2.5rem 1rem;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--font-head);
+  font-size: 2.4rem; font-weight: 800;
+  background: linear-gradient(90deg, var(--text), var(--muted));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+
+/* ── FEATURES ── */
+.section { padding: 6rem 5%; max-width: 1100px; margin: 0 auto; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -1px;
+  line-height: 1.1; margin-bottom: 1rem;
+}
+.section-sub { color: var(--muted); max-width: 480px; font-weight: 300; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.5rem; margin-top: 3.5rem;
+}
+.feature-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative; overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0; transition: opacity 0.3s;
+}
+.feature-card:hover { border-color: rgba(0,229,192,0.2); transform: translateY(-4px); }
+.feature-card:hover::before { opacity: 1; }
+
+.feature-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: rgba(0,229,192,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; margin-bottom: 1.25rem;
+}
+.feature-card h3 {
+  font-family: var(--font-head);
+  font-weight: 600; font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+}
+.feature-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  padding: 6rem 5%;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.how-inner { max-width: 1100px; margin: 0 auto; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3.5rem; }
+.step { text-align: center; padding: 1.5rem; }
+.step-num {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid rgba(0,229,192,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 1.1rem; font-weight: 700;
+  color: var(--accent); margin: 0 auto 1.25rem;
+  background: rgba(0,229,192,0.06);
+}
+.step h3 { font-family: var(--font-head); font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+.step p { font-size: 0.875rem; color: var(--muted); }
+
+/* ── CTA ── */
+.cta-section {
+  padding: 8rem 5%; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-glow {
+  position: absolute; width: 600px; height: 600px;
+  border-radius: 50%; background: var(--accent);
+  filter: blur(120px); opacity: 0.07;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cta-section h2 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800; letter-spacing: -1.5px;
+  max-width: 640px; margin: 0 auto 1.2rem;
+}
+.cta-section p { color: var(--muted); margin-bottom: 2.5rem; font-size: 1.05rem; }
+
+.waitlist-form {
+  display: flex; gap: 10px; max-width: 420px;
+  margin: 0 auto; flex-wrap: wrap; justify-content: center;
+}
+.waitlist-form input {
+  flex: 1; min-width: 220px;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 0.85rem 1.2rem; font-family: var(--font-body);
+  font-size: 0.95rem; outline: none; transition: border-color 0.2s;
+}
+.waitlist-form input::placeholder { color: var(--muted); }
+.waitlist-form input:focus { border-color: rgba(0,229,192,0.4); }
+.waitlist-form button {
+  background: var(--accent); color: #050A14;
+  border: none; padding: 0.85rem 1.6rem;
+  border-radius: 8px; font-family: var(--font-body);
+  font-weight: 500; font-size: 0.95rem;
+  cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.waitlist-form button:hover { opacity: 0.88; transform: translateY(-2px); }
+.form-note { font-size: 0.8rem; color: var(--muted); margin-top: 1rem; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 5%;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; }
+.footer-logo span { color: var(--accent); }
+.footer-links { display: flex; gap: 1.5rem; list-style: none; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { color: var(--muted); font-size: 0.8rem; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats { flex-direction: column; }
+  .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem; }
+  .stat:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Fin<span>Flux</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('email').focus()">Get early access</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Now in private beta — limited spots
+  </div>
+
+  <h1>Your money,<br><em>always in motion</em></h1>
+
+  <p class="hero-sub">FinFlux gives modern businesses real-time cash flow intelligence, AI-powered forecasting, and instant payment visibility — all in one place.</p>
+
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('email').focus()">
+      Join the waitlist
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="btn-ghost">Watch demo</button>
+  </div>
+
+  <!-- DASHBOARD PREVIEW -->
+  <div class="dashboard-wrap">
+    <div class="dashboard-glow"></div>
+    <div class="dashboard">
+      <div class="dash-header">
+        <span class="dash-title">Cash Flow Overview</span>
+        <span class="dash-date">June 2026 · Live</span>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dash-card-label">Total Inflow</div>
+          <div class="dash-card-value">€84,320</div>
+          <div class="dash-card-change">↑ +12.4%</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-label">Net Flow</div>
+          <div class="dash-card-value">€31,850</div>
+          <div class="dash-card-change">↑ +8.1%</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-label">Burn Rate</div>
+          <div class="dash-card-value">€4,200</div>
+          <div class="dash-card-change down">↓ -3.2%</div>
+        </div>
+      </div>
+      <div class="chart-area">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="chart-label">Monthly revenue</span>
+          <span class="chart-label">Last 7 months</span>
+        </div>
+        <div class="chart-bar-row">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">€2.4B+</div>
+    <div class="stat-label">Cash flow tracked</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">8,200+</div>
+    <div class="stat-label">Businesses on waitlist</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">99.9%</div>
+    <div class="stat-label">Uptime guaranteed</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">3 sec</div>
+    <div class="stat-label">Avg. payment sync</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div>
+    <span class="section-tag">Features</span>
+    <h2 class="section-title">Everything your finance<br>team actually needs</h2>
+    <p class="section-sub">Stop juggling spreadsheets. FinFlux brings your entire financial picture into one intelligent dashboard.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">⚡</div>
+      <h3>Real-time cash flow</h3>
+      <p>See money moving in and out of your business the moment it happens — not days later.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🧠</div>
+      <h3>AI forecasting</h3>
+      <p>Predict your runway, spot shortfalls before they happen, and get smart recommendations automatically.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔗</div>
+      <h3>Bank & payment sync</h3>
+      <p>Connect all your bank accounts, Stripe, PayPal and 400+ integrations in under two minutes.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📊</div>
+      <h3>Spend analytics</h3>
+      <p>Automatically categorize every transaction and surface exactly where your money is going.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔔</div>
+      <h3>Smart alerts</h3>
+      <p>Get notified before your balance dips, a big payment lands, or unusual activity is detected.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔒</div>
+      <h3>Bank-grade security</h3>
+      <p>256-bit encryption, SOC 2 Type II certified, and read-only access to your accounts. Always.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-section" id="how">
+  <div class="how-inner">
+    <span class="section-tag">How it works</span>
+    <h2 class="section-title">Up and running in minutes</h2>
+    <p class="section-sub">No accountant needed. No setup fees. Just connect and go.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Connect your accounts</h3>
+        <p>Securely link your banks, payment processors, and invoicing tools in one click.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3>FinFlux does the work</h3>
+        <p>Our AI automatically maps, categorizes, and analyzes all your financial data.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>Make smarter decisions</h3>
+        <p>Get clear insights, forecasts, and alerts so you always know where you stand.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h3>Grow with confidence</h3>
+        <p>Scale your business knowing your finances are tracked, protected, and optimized.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="pricing">
+  <div class="cta-glow"></div>
+  <h2>Ready to take control of your cash flow?</h2>
+  <p>Join 8,200+ businesses already on the waitlist. Free during beta.</p>
+  <form class="waitlist-form" onsubmit="handleSubmit(event)">
+    <input type="email" id="email" placeholder="your@company.com" required>
+    <button type="submit">Get early access</button>
+  </form>
+  <p class="form-note">No credit card required · Free during beta · Cancel anytime</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Fin<span>Flux</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Security</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 FinFlux. All rights reserved.</span>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  const input = e.target.querySelector('input');
+  btn.textContent = '🎉 You\'re on the list!';
+  btn.style.background = '#00B896';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = 'Get early access';
+    btn.style.background = '';
+  }, 3000);
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
